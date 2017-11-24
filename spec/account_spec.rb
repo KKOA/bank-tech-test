@@ -10,4 +10,11 @@ describe Account do
       end
     end
   end
+  describe '#deposit' do
+    it 'Transcations confirmation message' do
+      amount = 100
+      message = "#{amount} deposit. New balance is :#{amount}"
+      expect(account.deposit(amount)).to eq message
+    end
+  end
 end
