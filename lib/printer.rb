@@ -2,17 +2,18 @@ class Printer
   def initialize(logs)
     @logs = logs
   end
-  
-  def print
-    return 'No transactions' if @logs.count === 0
+
+  def format_header
     header = "Date | Credit | Debit | Balance\n"
-    statement = header
-    @logs.each do |log|
-      statement += "#{log[0]} "
-      statement += "| #{format('%.2f', log[1])} "
-      statement += "| #{format('%.2f', log[2])} "
-      statement += "| #{format('%.2f', log[3])} \n"
+  end
+
+  def print
+    return 'No transactions' if @logs.count.zero?
+    statement = ''
+    @logs.reverse.each do |log|
+      statement += "#{log[0]} | #{format('%.2f', log[1])} "
+      statement += "| #{format('%.2f', log[2])} | #{format('%.2f', log[3])} \n"
     end
-    statement
+    format_header + statement
   end
 end
