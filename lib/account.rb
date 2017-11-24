@@ -8,7 +8,12 @@ class Account
   end
 
   def deposit(amount, date = Time.now.strftime('%d/%m/%Y'))
-    @logs << [date,amount.to_f,0.00,get_balance + amount]
-    "#{amount} deposit. New balance is :#{get_balance}"
+    @logs << [date, amount.to_f, 0.00, get_balance + amount]
+    "#{amount} deposited. New balance is :#{get_balance}"
+  end
+
+  def withdraw(amount, date = Time.now.strftime('%d/%m/%Y'))
+    @logs << [date, 0.00, amount.to_f, get_balance - amount]
+    "#{amount} withdrawn. New balance is :#{get_balance}"
   end
 end
