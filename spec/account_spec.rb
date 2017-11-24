@@ -2,11 +2,17 @@ require 'account'
 require 'timecop'
 describe Account do
   subject(:account) { described_class.new }
-  let(:amount1) { 100 }
+  let(:amount1) { 1000 }
+  let(:amount2) { 250 }
   describe '#get_balance' do
     context 'No transcation' do
       it 'return startup balance' do
         expect(account.get_balance).to eq 0.0
+      end
+      it 'return current balance' do
+        account.deposit(amount1)
+        account.withdraw(amount2)
+        expect(account.get_balance).to eq 750.0
       end
     end
   end
