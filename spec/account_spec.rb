@@ -1,8 +1,8 @@
 require 'account'
 require 'timecop'
-
 describe Account do
   subject(:account) { described_class.new }
+  let(:amount1) { 100 }
   describe '#get_balance' do
     context 'No transcation' do
       it 'return startup balance' do
@@ -11,10 +11,15 @@ describe Account do
     end
   end
   describe '#deposit' do
-    it 'Transcations confirmation message' do
-      amount = 100
-      message = "#{amount} deposit. New balance is :#{amount}"
-      expect(account.deposit(amount)).to eq message
+    it 'return transcations confirmation message' do
+      message = "#{amount1} deposited. New balance is :#{amount1}"
+      expect(account.deposit(amount1)).to eq message
+    end
+  end
+  describe '#withdraw' do
+    it 'return transcations confirmation message' do
+      message = "#{amount1} withdrawn. New balance is :#{-amount1}"
+      expect(account.withdraw(amount1)).to eq message
     end
   end
 end
