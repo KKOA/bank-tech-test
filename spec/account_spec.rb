@@ -28,4 +28,24 @@ describe Account do
       expect(account.withdraw(amount1)).to eq message
     end
   end
+  describe '#logs' do
+    context 'No transcation made' do
+      it 'return account log' do
+        result = [['24/11/2017', 0.0, 0.0, 0.0]]
+        expect(account.logs).to eq result
+      end
+    end
+    context 'transcation' do
+      it 'return account log' do
+        account.deposit(amount1)
+        account.withdraw(amount2)
+        result = [
+          ['24/11/2017', 0.0, 0.0, 0.0],
+          ['24/11/2017', 1000.0, 0.0, 1000.0],
+          ['24/11/2017', 0.0, 250.0, 750.0]
+        ]
+        expect(account.logs).to eq result
+      end
+    end
+  end
 end
