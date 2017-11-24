@@ -1,6 +1,6 @@
 class Account
   attr_reader :logs
-  def initialize(date = Time.now.strftime('%d/%m/%Y'), amount = 0)
+  def initialize(amount = 0 ,date = Time.now.strftime('%d/%m/%Y'))
     @logs = [[date, amount.to_f, 0.00, amount]]
   end
 
