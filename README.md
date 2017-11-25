@@ -1,6 +1,6 @@
 # Bank-tech-test
 
-This my submission for the Bank tech test based on specification below.
+The objective of this tech test was build a REPL application based on the following specification
 
 ## Specification
 
@@ -19,55 +19,63 @@ date || credit || debit || balance
 10/01/2012 || 1000.00 || || 1000.00
 ```
 
-## Screenshot
-
-![sample execution from terminal](https://github.com/KKOA/bank-tech-test/blob/master/ScreenShot.png)
-
-
-
-
-<!-- Add link domain model [domain model](domain_model) -->
+## [My Domain Model](https://github.com/KKOA/bank-tech-test/blob/master/domain_model.md)
 
 ## Technologies
 - Ruby
 - Rspec
 - Rubocop
 
-## Run application( command / terminal only )
-
+## Set up Appplication
+In terminal / command line enter following commands
 ```
 git clone https://github.com/KKOA/bank-tech-test
 cd bank-tech-test
-irb
-require './lib/account'
-require './lib/printer'
-account = Account.new
-```
-To add money pass an amount as argument to account.deposit().
-To remove money pass an amount as argument to account.withdraw().
-Date is optional argument and must be day/month/year format.
-If no date is submitted then current date is assigned.
-
-E.g.
-```
-account.deposit(350) #submit current date 
-account.deposit(450,'12/10/2017') # 12/10/2017 is used as the date
-account.withdraw(125)
+bundle install
 ```
 
-To view account print an account statement pass account.history as an argument to Printer.
+## Run in the terminal/command prompt:
 
-E.g
+ ```
+ cd bank-tech-test
+ irb
+ ```
+ Create a bank account by creating an instance of the bank account constructor object.
+ The constructor takes two optional arguments.
+ - start balance
+ - date account created
 ```
-printer = print.New(account.history)
-puts printer.print
+account = Account.new([start_balance,date]);
 ```
+If no arguments are submitted then account is created balance of 0 and date created as today date in day/month/year format.
+
+Account Class has 3 methods
+- deposit
+- withdraw
+- current_balance
+
+Both deposit and withdraw take mandatory amount argument and optional date of transcation.
+Date of transcation by default is current date.
+Current does not require any argument and returns the current balance
+```
+account.deposit(amount[,date])
+account.withdraw(amount[,date])
+account.current_balance()
+```
+To print account statement you must creating an instance of the printer constructor object and pass an account as argument. You can then call print on the object to output the account statement.
+```
+printer = Printer.new(account)
+puts printer.print()
+```
+
+## Screenshot
+
+![sample execution from terminal](https://github.com/KKOA/bank-tech-test/blob/master/ScreenShot.png)
 
 ## To view the rspec test
 
 There are two ways to view test
 ### 1. In terminal/command prompt
-Type following into terminal/command prompt
 ```
 cd bank-tech-test
 rspec
