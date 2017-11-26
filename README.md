@@ -64,7 +64,7 @@ account.current_balance()
 ```
 To print account statement you must creating an instance of the printer constructor object and pass an account as argument. You can then call print on the object to output the account statement.
 ```
-printer = Printer.new(account)
+printer = Printer.new(account.logs)
 puts printer.print()
 ```
 
