@@ -29,22 +29,25 @@ describe Account do
     end
   end
   describe '#logs' do
+    let(:time1){ Timecop.freeze(Time.local(2017, 11, 24)).strftime('%d/%m/%Y')}
     context 'No transcation made' do
       it 'return account log' do
         account = Account.new(0.0, '24/11/2017')
-        result = [['24/11/2017', 0.0, 0.0, 0.0]]
+        result = [[time1, 0.0, 0.0, 0.0]]
         expect(account.logs).to eq result
       end
     end
     context 'transcation' do
+      let(:time2){ Timecop.freeze(Time.local(2017, 11, 25)).strftime('%d/%m/%Y')}
+      let(:time3){ Timecop.freeze(Time.local(2017, 11, 26)).strftime('%d/%m/%Y')}
       it 'return account log' do
-        account = Account.new(0.0, '24/11/2017')
-        account.deposit(amount1, '24/11/2017')
-        account.withdraw(amount2, '24/11/2017')
+        account = Account.new(0.0, time1)
+        account.deposit(amount1, time2)
+        account.withdraw(amount2, time3)
         result = [
-          ['24/11/2017', 0.0, 0.0, 0.0],
-          ['24/11/2017', 1000.0, 0.0, 1000.0],
-          ['24/11/2017', 0.0, 250.0, 750.0]
+          [time1, 0.0, 0.0, 0.0],
+          [time2, 1000.0, 0.0, 1000.0],
+          [time3, 0.0, 250.0, 750.0]
         ]
         expect(account.logs).to eq result
       end
